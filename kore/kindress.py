@@ -206,7 +206,7 @@ class KindressCore:
     return ''.join(opf)
             
   def style(self):
-    css = codecs.open(os.path.join('html','base.css'), 'r')
+    css = codecs.open(os.path.join(self.path, 'html','base.css'), 'r')
     return css.read()
 
 class Data:
