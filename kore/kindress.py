@@ -18,10 +18,8 @@ class KindressCore:
     self.data.prettyname = 'Toilet Literature, '+date.today().isoformat()
     self.data.name = filename
     self.data.filename = filename+'.html'
-    with open(os.path.join(self.path, 'database.flat')) as f:
-      urls = f.readlines()
 
-    feeds = self.get_feed(urls)
+    feeds = self.get_feed(user.feeds)
     article = codecs.open(os.path.join(self.path,'html',filename+'.html'),'w+',encoding='utf-8')
     article.write(self.content(feeds).decode('utf-8'))
     article.close()
@@ -58,7 +56,7 @@ class KindressCore:
     return '<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="base.css"/></head><body><div class="break"><center><blockquote>A great idea can often be found in the combination of two existing ideas.</blockquote><em>-A friend</em></center></div></body></html>'
 
   def get_feed(self, urls):
-    future_calls = [Future(feedparser.parse, url.strip('\n')) for url in urls]
+    future_calls = [Future(feedparser.parse) for url in urls]
     feeds = [future_obj() for future_obj in future_calls]
 
     entries = []
