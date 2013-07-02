@@ -13,3 +13,7 @@ def strip_tags(html):
     s = MLStripper()
     s.feed(html)
     return s.get_data()
+
+def uploadFeedHeaderTo(instance, filename):
+  return 'feeds/%s/%s' % (instance.feed.id, filename)
+
